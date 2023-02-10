@@ -6,7 +6,7 @@ import { store } from '../store'
 export const PrivateRoute = ({ children }) => {
     const location = useLocation()
     const isAuth = useSelector((store) => {
-        return store.isAuth
+        return store.Loginreducer.isAuth
     })
 
     if(!isAuth){

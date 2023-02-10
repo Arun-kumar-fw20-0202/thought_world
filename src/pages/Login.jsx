@@ -16,13 +16,21 @@ export const Login = () => {
     const dispatch = useDispatch()    
     const navigate = useNavigate()
     const { isAuth, activeUser} = useSelector((store) =>{
-        return store
+        return {
+            isAuth: store.Loginreducer.isAuth,
+            activeUser: store.Loginreducer.activeUser
+        }
     })
-    console.log(isAuth)
 
     const handleCallbackResponse = (response) => {
         let userObj = jwt_decode(response.credential)
-        dispatch(Authantication(userObj))
+        let newObj = {
+            id: userObj.sub,
+            gmail: userObj.email,
+            avatar: userObj.picture,
+            name: userObj.given_name
+        }
+        dispatch(Authantication(newObj))
     }
 
     useEffect(() => {

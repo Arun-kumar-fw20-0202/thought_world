@@ -5,16 +5,16 @@ export const Profile = () => {
 
   const {isAuth, activeUser} = useSelector((store) => {
     return { 
-      activeUser: store.activeUser,
-      isAuth: store.isAuth
+      activeUser: store.Loginreducer.activeUser,
+      isAuth: store.Loginreducer.isAuth
     }
   })
-  console.log(isAuth)
-  console.log(activeUser)
+
+  // console.log(activeUser)
 
   return (
     <div>
-      <img src={activeUser.picture} alt="" />
+      <img src={activeUser.avatar} alt="" />
       <h3>{activeUser.name}</h3>
       <p>{activeUser.given_name}</p>
     </div>

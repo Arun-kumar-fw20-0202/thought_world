@@ -6,10 +6,11 @@ import { AuthLogout } from '../redux/loginReducer/action.login'
 
 export default function Navbar() {
   const dispatch = useDispatch()
-  const {isAuth,isLoading} = useSelector((store) => {
+  const {isAuth,isLoading,activeUser} = useSelector((store) => {
     return {
-      isAuth: store.isAuth,
-      isLoading: store.isLoading
+      isAuth: store.Loginreducer.isAuth,
+      isLoading: store.Loginreducer.isLoading,
+      activeUser: store.Loginreducer.activeUser,
     }
   }) 
 
@@ -20,14 +21,17 @@ export default function Navbar() {
   return (
     <>
         <header>
-            { isLoading ? "Loggin out....." : ""}
             <Link to={"/"}>Home</Link>
-            <Link to={"/add-post"}>Add Post</Link>
             <Link to={"/profile"}>Profile</Link>
+            <Link to={"/add-post"}>Add Post +</Link>
             {isAuth ? 
-              <Link onClick={handleLogout}>Logout</Link> 
+              <Link style={{textAlign: "center"}} onClick={handleLogout}>
+                {/* Logout */}
+                <img src={activeUser.avatar} alt="" /> 
+                {activeUser.name} 
+              </Link> 
               :
-              <Link to={"/login"}>Login</Link>
+              <Link to={"/login"}>Login </Link>
             }
             {/* <Link to={"/"}>Home</Link> */}
         </header>

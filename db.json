@@ -1,9 +1,25 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "userId": 118384988105595850000,
+      "title": "Title",
+      "imageUrl": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIwZGVsaGklMjBpbmRpYXxlbnwwfHwwfHw%3D&w=1000&q=80",
+      "privatePost": true,
+      "id": 1
+    },
+    {
+      "userId": 118384988105595850000,
+      "title": "This is my name & you can say it the title",
+      "imageUrl": "https://images.pexels.com/photos/2403538/pexels-photo-2403538.jpeg?cs=srgb&dl=pexels-ranjan-simkhada-2403538.jpg&fm=jpg",
+      "privatePost": false,
+      "id": 2
+    },
+    {
+      "userId": 118384988105595850000,
+      "title": "testing",
+      "imageUrl": "https://images.unsplash.com/photo-1581456495146-65a71b2c8e52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fHBlcnNvbnxlbnwwfHwwfHw%3D&w=1000&q=80",
+      "privatePost": false,
+      "id": 3
     }
   ],
   "users": [
