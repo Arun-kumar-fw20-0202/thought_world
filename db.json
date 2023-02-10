@@ -1,0 +1,81 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "users": [
+    {
+      "phone": "8586864566",
+      "gender": "male",
+      "name": "Arun",
+      "lname": "Kumar",
+      "gmail": "arun07744@gmail.com",
+      "password": "1234",
+      "avatar": "",
+      "id": 1
+    },
+    {
+      "phone": "7838557666",
+      "gender": "male",
+      "name": "Katill",
+      "lname": "boyy",
+      "gmail": "katillboyy@gmail.com",
+      "password": "12345",
+      "avatar": "",
+      "id": 2
+    },
+    {
+      "phone": "9205107244",
+      "gender": "male",
+      "name": "Rohan",
+      "lname": "Khanna",
+      "gmail": "rohan@gmail.com",
+      "password": "123456",
+      "avatar": "",
+      "id": 3
+    },
+    {
+      "phone": "8586864566",
+      "gender": "male",
+      "name": "Mario",
+      "lname": "__",
+      "gmail": "mario@gmail.com",
+      "password": "123456",
+      "avatar": "",
+      "id": 4
+    },
+    {
+      "phone": "9289771917",
+      "gender": "female",
+      "name": "neha",
+      "lname": "kumari",
+      "gmail": "neha.k97119@gmail.com",
+      "password": "123456",
+      "avatar": "",
+      "id": 5
+    },
+    {
+      "phone": "8586864566",
+      "gender": "female",
+      "name": "kiran",
+      "lname": "kumari",
+      "gmail": "kiranfeaindia@gmail.com",
+      "password": "123456",
+      "avatar": "",
+      "id": 6
+    },
+    {
+      "phone": "789789799",
+      "gender": "male",
+      "name": "dev",
+      "lname": "dass",
+      "gmail": "devdass@gmail.com",
+      "password": "123456",
+      "avatar": "",
+      "id": 7
+    }
+  ]
+}
