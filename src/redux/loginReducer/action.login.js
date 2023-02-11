@@ -1,3 +1,4 @@
+import axios from "axios"
 import { LOGIN_USER_ERROR, LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGOUT_USER_ERROR, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../actionType"
 
 export const loginUserRequest = () => {
@@ -24,7 +25,49 @@ export const GoogleLogoutError = () => {
 }
 
 export const Authantication = (userData) => (dispatch) => {
-    dispatch(loginUserSuccess(userData))
+    dispatch(loginUserRequest)
+    axios.get("http://localhost:8080/users").then((res)=> {
+        if(res.data.length <= 0) {
+            axios.post('http://localhost:8080/users',userData).then((res)=> {
+
+                    console.log("part 2") 
+                    dispatch(loginUserSuccess(res.data))
+                    localStorage.setItem('userData',JSON.stringify(res.data))
+                    localStorage.setItem('isAuth',JSON.stringify(true))     
+
+                }).catch((err)=> {
+                    dispatch(loginUserError())
+                })
+        }else{
+
+            res.data.map((el)=> {
+
+                
+                if(el.id == undefined || el.id != undefined) {
+                    axios.post('http://localhost:8080/users',userData).then((res)=> {
+        
+                        console.log("part 2") 
+                        dispatch(loginUserSuccess(res.data))
+                        localStorage.setItem('userData',JSON.stringify(res.data))
+                        localStorage.setItem('isAuth',JSON.stringify(true))     
+                        
+                    }).catch((err)=> {
+                        dispatch(loginUserError())
+                    })
+                }
+                else if(el.id == userData.id){
+        
+                    console.log("part one")
+                    localStorage.setItem('userData',JSON.stringify(userData))
+                    localStorage.setItem('isAuth',JSON.stringify(true))          
+                    dispatch(loginUserSuccess(userData))
+                }
+            })
+        }
+    }).catch((err) => {
+        console.log(err)
+    })
+   
     localStorage.setItem('userData',JSON.stringify(userData))
     localStorage.setItem('isAuth',JSON.stringify(true))
 }

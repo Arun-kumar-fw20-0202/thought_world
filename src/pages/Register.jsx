@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userRegistration } from '../redux/registration/action.register'
-import { store } from '../store'
 import "../styles/register.css"
 
 let userData = {

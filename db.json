@@ -1,97 +1,62 @@
 {
-  "posts": [
+  "posts": [ 
+  {
+    "userId": 118384988105595850000,
+    "title": "Testing",
+    "imageUrl": "https://scontent.fdel33-1.fna.fbcdn.net/v/t39.30808-6/325428307_1394369548032516_3429002344969803945_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=nU9Jx2IrsfEAX9qZbir&_nc_ht=scontent.fdel33-1.fna&oh=00_AfC5f0lBPJjMQHhJk29AjigTgzv-pRenYy9QnF6NJ_FYGQ&oe=63ECB43D",
+    "privatePost": false,
+    "id": 1
+  },
+  {
+    "userId": 118384988105595850000,
+    "title": "Katill_boyy",
+    "imageUrl": "https://scontent.fdel33-1.fna.fbcdn.net/v/t39.30808-6/313436507_2362528897212121_2716331797701493187_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=174925&_nc_ohc=lEwTYqWWCx0AX-NZCM6&tn=_Rl7DjqMEJVm8LWt&_nc_ht=scontent.fdel33-1.fna&oh=00_AfBrZ8hlEVgX-rRw4eAJ8kqmnkNGlbskQ0aWcufNpFJNhA&oe=63EC1439",
+    "privatePost": false,
+    "id": 2
+  },
+  {
+    "userId": 118384988105595850000,
+    "title": "Katill_boyy",
+    "imageUrl": "https://scontent.fdel33-1.fna.fbcdn.net/v/t39.30808-6/313375002_2350459741752370_1664205843644260185_n.jpg?stp=c0.93.843.843a_dst-jpg_p843x403&_nc_cat=100&ccb=1-7&_nc_sid=174925&_nc_ohc=q-tedO91r08AX-Y3Yn6&_nc_ht=scontent.fdel33-1.fna&oh=00_AfDwgMQVZBQvf4OK493ivyOV9mPNvqE8Ay22VJY6IWztJQ&oe=63ECAA89",
+    "privatePost": false,
+    "id": 3
+  }
+],
+  "likes": [
     {
-      "userId": 118384988105595850000,
-      "title": "Title",
-      "imageUrl": "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bmV3JTIwZGVsaGklMjBpbmRpYXxlbnwwfHwwfHw%3D&w=1000&q=80",
-      "privatePost": true,
-      "id": 1
-    },
-    {
-      "userId": 118384988105595850000,
-      "title": "This is my name & you can say it the title",
-      "imageUrl": "https://images.pexels.com/photos/2403538/pexels-photo-2403538.jpeg?cs=srgb&dl=pexels-ranjan-simkhada-2403538.jpg&fm=jpg",
-      "privatePost": false,
+      "likedUserId": "118384988105595854392",
+      "postId": 2,
       "id": 2
     },
     {
-      "userId": 118384988105595850000,
-      "title": "testing",
-      "imageUrl": "https://images.unsplash.com/photo-1581456495146-65a71b2c8e52?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fHBlcnNvbnxlbnwwfHwwfHw%3D&w=1000&q=80",
-      "privatePost": false,
+      "likedUserId": "118384988105595854392",
+      "postId": 3,
       "id": 3
+    },
+    {
+      "likedUserId": "118384988105595854392",
+      "postId": 2,
+      "id": 4
     }
   ],
   "users": [
     {
-      "phone": "8586864566",
-      "gender": "male",
-      "name": "Arun",
-      "lname": "Kumar",
+      "id": "118384988105595854392",
       "gmail": "arun07744@gmail.com",
-      "password": "1234",
-      "avatar": "",
-      "id": 1
+      "avatar": "https://lh3.googleusercontent.com/a/AEdFTp7yhd-jPwOaiauzP6FUr8hteOxekBvCLwQ_fPI7gw=s96-c",
+      "name": "Code4Unique"
     },
     {
-      "phone": "7838557666",
-      "gender": "male",
-      "name": "Katill",
-      "lname": "boyy",
-      "gmail": "katillboyy@gmail.com",
-      "password": "12345",
-      "avatar": "",
-      "id": 2
-    },
-    {
-      "phone": "9205107244",
-      "gender": "male",
-      "name": "Rohan",
-      "lname": "Khanna",
-      "gmail": "rohan@gmail.com",
-      "password": "123456",
-      "avatar": "",
-      "id": 3
-    },
-    {
-      "phone": "8586864566",
-      "gender": "male",
-      "name": "Mario",
-      "lname": "__",
-      "gmail": "mario@gmail.com",
-      "password": "123456",
-      "avatar": "",
-      "id": 4
-    },
-    {
-      "phone": "9289771917",
-      "gender": "female",
-      "name": "neha",
-      "lname": "kumari",
-      "gmail": "neha.k97119@gmail.com",
-      "password": "123456",
-      "avatar": "",
-      "id": 5
-    },
-    {
-      "phone": "8586864566",
-      "gender": "female",
-      "name": "kiran",
-      "lname": "kumari",
+      "id": "102074821942506059328",
       "gmail": "kiranfeaindia@gmail.com",
-      "password": "123456",
-      "avatar": "",
-      "id": 6
+      "avatar": "https://lh3.googleusercontent.com/a/AEdFTp6DHewfX05eILmTip9QUdfb2-F80N8QXn2ZS0DCjA=s96-c",
+      "name": "Kiran"
     },
     {
-      "phone": "789789799",
-      "gender": "male",
-      "name": "dev",
-      "lname": "dass",
-      "gmail": "devdass@gmail.com",
-      "password": "123456",
-      "avatar": "",
-      "id": 7
+      "id": "112250471330920397183",
+      "gmail": "arun.kumar97107@gmail.com",
+      "avatar": "https://lh3.googleusercontent.com/a/AEdFTp62G9p1BiywWP6ti-fYiVxUDj6HdIZtms_e_H0msA=s96-c",
+      "name": "KÃTILL"
     }
   ]
 }

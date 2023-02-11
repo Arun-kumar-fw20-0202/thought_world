@@ -1,49 +1,67 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { handleGetPost } from '../redux/addPostReducer/action.addPost'
+import { addLike, DeleteLike } from '../redux/likes/action.like'
 import { fetchUsers } from '../redux/registration/action.register'
+import { CountPostLikes } from './CountPostLikes'
 
-export const LoadPost = () => {
+export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
+
     const dispatch = useDispatch()
-    const {activeUser,posts, users} = useSelector((store) => {
+    const {activeUser, users} = useSelector((store) => {
         return {
-            activeUser: store.Loginreducer.activeUser,
-            posts: store.AddPostreducer.posts,
-            users: store.reducer.users
+            users: store.reducer.users,
+            activeUser: store.Loginreducer.activeUser
         }
-    })
+    },shallowEqual)
 
-    console.log(users)
+    const manageLike = (e) => {
+        e.preventDefault();
+        let userObj = {
+            likedUserId: activeUser.id,
+            postId : id,
+        }
+        dispatch(addLike(userObj))
+    }
+
+    const removeLike = (likeId) => {
+        // alert(likeId)
+        dispatch(DeleteLike(likeId))
+    }
 
   useEffect(() => {
     dispatch(fetchUsers)
-    dispatch(handleGetPost)
   },[])
  
 
   return (
     <>
-        {posts && posts.map((ele,i) => (
-
-            <div key={i} className="card">
+            <div className="card">
                 <div className="head">
-                    {/* {users && users.map((el) => {
-                        <>
-                            <img src={activeUser.avatar} alt="" />
-                            <div className="username">{ele.name}</div>
-                        </> 
-                    })} */}
+                {users.map((ele,i) => (
+                    <span key={i}>
+                        <img src={userId == ele.id ? ele.avatar: ""} alt="" />
+                        <span className="username">{userId == ele.id ? ele.name: ""}</span>
+                    </span>
+                ))}
                 </div>
                 <div className="content">
-                    <img src="" alt="" />
+                    <img src={imageUrl} width="120px" alt="" />
                 </div>
-                <div className="likes"></div>
+                <div className="likes">
+                   <CountPostLikes manageLike={manageLike} removeLike={removeLike} postId={id} />
+                    {/*  */}
+                    <Link><i className='fa fa-bookmark-o'></i></Link>
+                    {/*  */}
+                    <Link><i className='fa fa-send'></i></Link>
+                </div>
+
                 <div className="comment">
-                    <input type="text" />
+                    <input placeholder='comment...' type="text" />
                     <button>send</button>
                 </div>
             </div>
-        ))}
     </>
   )
 }

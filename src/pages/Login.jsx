@@ -6,8 +6,6 @@ import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 // import { store } from "../store";
 import { Authantication } from "../redux/loginReducer/action.login";
-
-
 let userInput = {
     username: '',
     password: '',
@@ -15,12 +13,15 @@ let userInput = {
 export const Login = () => {
     const dispatch = useDispatch()    
     const navigate = useNavigate()
-    const { isAuth, activeUser} = useSelector((store) =>{
+    const { isAuth, activeUser,isLoading,isError} = useSelector((store) =>{
         return {
             isAuth: store.Loginreducer.isAuth,
-            activeUser: store.Loginreducer.activeUser
+            activeUser: store.Loginreducer.activeUser,
+            isLoading: store.reducer.isLoading,
+            isError: store.reducer.isError,
         }
     })
+    // console.log(isLoading)
 
     const handleCallbackResponse = (response) => {
         let userObj = jwt_decode(response.credential)
@@ -58,6 +59,8 @@ export const Login = () => {
                     </div>
                     {/* <!--  --> */}
                     <div className="box2">
+                        <h3>{isLoading ? "Loging....": ""}</h3>
+                        <h3>{isError ? "Something went wrong Please try again later" : ""}</h3>
                         <form  autoComplete="off">
                             <h1>Login</h1>
                                 <div className="inputBx">
