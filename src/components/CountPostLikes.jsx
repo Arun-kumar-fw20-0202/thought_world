@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { LoadLikes } from '../redux/likes/action.like'
+import { addLike, DeleteLike, LoadLikes } from '../redux/likes/action.like';
 
-export const CountPostLikes = ({manageLike, postId, removeLike}) => {
+export const CountPostLikes = ({ postId}) => {
     const dispatch = useDispatch()
     const {likes,isAuth,activeUser} = useSelector((store) => {
         return {
@@ -13,15 +13,33 @@ export const CountPostLikes = ({manageLike, postId, removeLike}) => {
         }
     },shallowEqual)
 
-    let check = false;
+    let check_liked = false;
     let totalLikes = 0;
-    let id;
-    likes.map((ele) => {
-        ele.postId == postId && ele.likedUserId == activeUser.id ? check = true: ""; 
-        ele.postId == postId? totalLikes++ : 0;
-        ele.postId == postId? id = ele.id : 0;
-
+    likes && likes.map((ele) => {
+        ele.postId == postId && ele.likedUserId == activeUser.id ? check_liked = true: ""; 
+        ele.postId == postId ? totalLikes++ : 0;
     })
+
+    const manageLike = (e) => {
+        e.preventDefault();
+        let userObj = {
+            likedUserId: activeUser.id,
+            postId : postId,
+            hitLike: true
+        }
+        dispatch(addLike(userObj))
+    }
+
+    const removeLike = (e) => {
+        e.preventDefault()
+        // console.log(id)
+        likes && likes.map((ele) => {
+            if(ele.postId == postId && ele.likedUserId == activeUser.id){
+                console.log(ele.id)
+                dispatch(DeleteLike(ele.id))
+            }
+        })
+    }
 
     useEffect(() => {
         dispatch(LoadLikes)
@@ -30,23 +48,23 @@ export const CountPostLikes = ({manageLike, postId, removeLike}) => {
   return (
     <>
         {isAuth ?  
-         check ? 
-            <Link style={{color: "red"}} onClick={(e)=>removeLike(postId, activeUser.id,e)} >
+         check_liked ? 
+            <Link style={{color: "red"}} onClick={(e)=> removeLike(e)} >
                 <i className='fa fa-heart'></i>
                 <br />
-                <span style={{fontSize: "10px"}}><small>Likes</small> {totalLikes}</span>
+                <span style={{fontSize: "15px"}}><small>Likes</small> {totalLikes}</span>
             </Link>
             :
             <Link onClick={(e) => manageLike(e)}>
                 <i className='fa fa-heart-o'></i>
                 <br />
-                <span style={{fontSize: "10px"}}><small>Likes</small> {totalLikes}</span>
+                <span style={{fontSize: "15px"}}><small>Likes</small> {totalLikes}</span>
             </Link>
             :
             <Link onClick={() => alert("Please Login first")}>
                 <i className='fa fa-heart-o'></i>
                 <br />
-                <span style={{fontSize: "10px"}}><small>Likes</small> {totalLikes}</span>
+                <span style={{fontSize: "15px"}}><small>Likes</small> {totalLikes}</span>
             </Link>
         }
     </>

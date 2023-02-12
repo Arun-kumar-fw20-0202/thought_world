@@ -11,9 +11,10 @@ let userInput = {
     password: '',
 }
 export const Login = () => {
-    const dispatch = useDispatch()    
-    const navigate = useNavigate()
-    const location = useLocation()
+    const dispatch = useDispatch() ;   
+    const navigate = useNavigate();
+    const location = useLocation();
+    // console.log(location.pathname)
     const { isAuth, activeUser,isLoading,isError} = useSelector((store) =>{
         return {
             isAuth: store.Loginreducer.isAuth,
@@ -29,16 +30,21 @@ export const Login = () => {
             id: userObj.sub,
             gmail: userObj.email,
             avatar: userObj.picture,
-            name: userObj.given_name
+            name: userObj.name,
+            name2: userObj.given_name
         }
-        // console.log(newObj)
+        console.log(userObj)
         dispatch(Authantication(newObj))
     }
 
+    console.log(location)
     useEffect(() => {
         if(isAuth) {
             navigate(location.state)
-        };
+        }
+        else if(isAuth && location.pathname == '/login'){
+            navigate("/")
+        }
         google.accounts.id.initialize({
             client_id: "620150314608-nngruoh1gbevp4kbv5vir2h3on0fdnar.apps.googleusercontent.com",
             callback: handleCallbackResponse

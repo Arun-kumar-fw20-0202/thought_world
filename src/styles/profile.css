@@ -1,0 +1,46 @@
+.profile_main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    margin: auto;
+    /* border: 1px solid black; */
+    /* background-color: red; */
+}
+
+.profile_main > .P_top{
+    padding: 10px 20px;
+    display: flex;
+    /* align-items: center; */
+    gap: 50px;
+    /* border: 1px solid black; */
+}
+
+.profile_main > .P_top > .avatar{
+    width: 20%;
+    /* border: 1px solid black; */
+}
+.profile_main > .P_top > .avatar > img{
+    border-radius: 50%;
+    width: 100%;
+}
+
+.profile_main > .P_top > .totla{
+    border: 1px solid black;
+}
+.profile_main > .My_posts{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.profile_main > .My_posts > .card{
+    width: 95%;
+    height: 400px;
+}
+.profile_main > .My_posts > .card > img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: black;
+    
+}

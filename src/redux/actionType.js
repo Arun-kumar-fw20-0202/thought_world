@@ -28,3 +28,7 @@ export const GET_USERS_ERROR = "GET_USERS_ERROR";
 export const GIVE_LIKE = "GIVE_LIKE";
 export const GET_LIKES = "GET_LIKES";
 export const REMOVE_LIKES = "REMOVE_LIKES"
+
+export const SAVE_POST = "SAVE_POST";
+export const GET_SAVE_POST = "GET_SAVE_POST";
+export const REMOVE_SAVE_POST = "REMOVE_SAVE_POST"
