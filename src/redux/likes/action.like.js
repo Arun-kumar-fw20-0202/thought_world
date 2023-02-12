@@ -28,16 +28,20 @@ export const LoadLikes = (dispatch) => {
     })
 }
 
-export const DeleteLike = (deleteId) => async (dispatch) => {
-    
-    try {
-        const res = await fetch(`http://localhost:8080/likes/?id=1&id=${deleteId}`)
+export const DeleteLike = (id) => async (dispatch) => {
+
+    try{
+        const res = await fetch(`http://localhost:8080/likes/${id}`,{
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         let data = await res.json();
         console.log(data)
-
-    } catch (e) {
+        dispatch(handleRemoveLike(id))
+    }catch(e){
         console.log(e)
-    }    
+    }
 
-    dispatch(handleRemoveLike(deleteId))
 }

@@ -5,10 +5,11 @@ import { LoadLikes } from '../redux/likes/action.like'
 
 export const CountPostLikes = ({manageLike, postId, removeLike}) => {
     const dispatch = useDispatch()
-    const {likes,isAuth} = useSelector((store) => {
+    const {likes,isAuth,activeUser} = useSelector((store) => {
         return {
             likes: store.LikeReducer.likes,
-            isAuth: store.Loginreducer.isAuth
+            isAuth: store.Loginreducer.isAuth,
+            activeUser: store.Loginreducer.activeUser
         }
     },shallowEqual)
 
@@ -16,13 +17,11 @@ export const CountPostLikes = ({manageLike, postId, removeLike}) => {
     let totalLikes = 0;
     let id;
     likes.map((ele) => {
-        ele.postId == postId ? check = true: ""; 
+        ele.postId == postId && ele.likedUserId == activeUser.id ? check = true: ""; 
         ele.postId == postId? totalLikes++ : 0;
         ele.postId == postId? id = ele.id : 0;
 
     })
-
-    console.log(likes)
 
     useEffect(() => {
         dispatch(LoadLikes)
@@ -30,8 +29,9 @@ export const CountPostLikes = ({manageLike, postId, removeLike}) => {
     
   return (
     <>
-        {check ? 
-            <Link style={{color: "red"}} onClick={() => removeLike(id)} >
+        {isAuth ?  
+         check ? 
+            <Link style={{color: "red"}} onClick={(e)=>removeLike(postId, activeUser.id,e)} >
                 <i className='fa fa-heart'></i>
                 <br />
                 <span style={{fontSize: "10px"}}><small>Likes</small> {totalLikes}</span>
@@ -41,7 +41,14 @@ export const CountPostLikes = ({manageLike, postId, removeLike}) => {
                 <i className='fa fa-heart-o'></i>
                 <br />
                 <span style={{fontSize: "10px"}}><small>Likes</small> {totalLikes}</span>
-            </Link>}
+            </Link>
+            :
+            <Link onClick={() => alert("Please Login first")}>
+                <i className='fa fa-heart-o'></i>
+                <br />
+                <span style={{fontSize: "10px"}}><small>Likes</small> {totalLikes}</span>
+            </Link>
+        }
     </>
   )
 }

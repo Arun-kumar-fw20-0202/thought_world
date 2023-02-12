@@ -19,7 +19,7 @@ export const Home = () => {
  
   return (
     <div className='AllCards'>
-      {posts.map((ele,i) => (
+      {posts && posts.map((ele,i) => (
         <LoadPost key={i} {...ele} />
       ))}
     </div>

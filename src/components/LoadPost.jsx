@@ -9,10 +9,11 @@ import { CountPostLikes } from './CountPostLikes'
 export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
 
     const dispatch = useDispatch()
-    const {activeUser, users} = useSelector((store) => {
+    const {activeUser, users,likes} = useSelector((store) => {
         return {
             users: store.reducer.users,
-            activeUser: store.Loginreducer.activeUser
+            activeUser: store.Loginreducer.activeUser,
+            likes: store.LikeReducer.likes
         }
     },shallowEqual)
 
@@ -21,13 +22,18 @@ export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
         let userObj = {
             likedUserId: activeUser.id,
             postId : id,
+            hitLike: true
         }
         dispatch(addLike(userObj))
     }
 
-    const removeLike = (likeId) => {
-        // alert(likeId)
-        dispatch(DeleteLike(likeId))
+    const removeLike = (pid,aui,e) => {
+        e.preventDefault()
+        likes.map((ele) => {
+            if(ele.postId == id && ele.likedUserId == activeUser.id){
+                dispatch(DeleteLike(ele.id))
+            }
+        })
     }
 
   useEffect(() => {
@@ -47,7 +53,11 @@ export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
                 ))}
                 </div>
                 <div className="content">
-                    <img src={imageUrl} width="120px" alt="" />
+                    {/* <img src={imageUrl} width="120px" alt="" /> */}
+                    <video controls={true} poster={imageUrl}>
+                        <source src={imageUrl} />
+                    </video> 
+                    {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/yXWw0_UfSFg?autoplay=1"  frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe> */}
                 </div>
                 <div className="likes">
                    <CountPostLikes manageLike={manageLike} removeLike={removeLike} postId={id} />

@@ -13,16 +13,17 @@
     border: 1px solid #000;
 }
 .card > .head{
-    display: flex;
-    align-items: center;
+    padding: 4px 0;
     /* border: 1px solid #000; */
 }
 .card > .head > span{
     display: flex;
     align-items: center;
-    gap: 10px;
+    line-height: 0;
     font-size: 10px;
-    padding: 10px 5px;
+    gap: 10px;
+    padding: 0px 5px;
+    /* border: 1px solid black; */
 }
 
 .card > .head img{
@@ -35,8 +36,11 @@
     height: 100%;
     /* background: red; */
 }
+.card > .content > iframe,
+.card > .content > video,
 .card > .content > img{
     width: 100%;
+    background-color: black;
 }
 .card > .likes{
     display:flex;

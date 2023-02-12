@@ -30,7 +30,7 @@ export const AddPost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let newObj = {
-      userId: +activeUser.id,
+      userId: activeUser.id,
       title,
       imageUrl,
       privatePost: privatePost
@@ -38,9 +38,6 @@ export const AddPost = () => {
     dispatch(handleAddPost(newObj))
   }
   
-  // if(!isLoading){
-    // setState(addData)
-  // }
 
   return (
     <div className='M_add'>

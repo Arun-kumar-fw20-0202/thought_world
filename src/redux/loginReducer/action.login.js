@@ -39,11 +39,14 @@ export const Authantication = (userData) => (dispatch) => {
                     dispatch(loginUserError())
                 })
         }else{
-
-            res.data.map((el)=> {
-
-                
-                if(el.id == undefined || el.id != undefined) {
+            res.data.map((el)=> {                
+                if(el.id == userData.id) {
+                    console.log("part one")
+                    localStorage.setItem('userData',JSON.stringify(userData))
+                    localStorage.setItem('isAuth',JSON.stringify(true))          
+                    dispatch(loginUserSuccess(userData))
+                    
+                }else{
                     axios.post('http://localhost:8080/users',userData).then((res)=> {
         
                         console.log("part 2") 
@@ -54,13 +57,6 @@ export const Authantication = (userData) => (dispatch) => {
                     }).catch((err)=> {
                         dispatch(loginUserError())
                     })
-                }
-                else if(el.id == userData.id){
-        
-                    console.log("part one")
-                    localStorage.setItem('userData',JSON.stringify(userData))
-                    localStorage.setItem('isAuth',JSON.stringify(true))          
-                    dispatch(loginUserSuccess(userData))
                 }
             })
         }

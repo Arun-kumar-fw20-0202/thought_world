@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import "../styles/login.css"
 import 'font-awesome/css/font-awesome.min.css';
 import { useEffect } from "react";
@@ -13,6 +13,7 @@ let userInput = {
 export const Login = () => {
     const dispatch = useDispatch()    
     const navigate = useNavigate()
+    const location = useLocation()
     const { isAuth, activeUser,isLoading,isError} = useSelector((store) =>{
         return {
             isAuth: store.Loginreducer.isAuth,
@@ -21,7 +22,6 @@ export const Login = () => {
             isError: store.reducer.isError,
         }
     })
-    // console.log(isLoading)
 
     const handleCallbackResponse = (response) => {
         let userObj = jwt_decode(response.credential)
@@ -31,10 +31,14 @@ export const Login = () => {
             avatar: userObj.picture,
             name: userObj.given_name
         }
+        // console.log(newObj)
         dispatch(Authantication(newObj))
     }
 
     useEffect(() => {
+        if(isAuth) {
+            navigate(location.state)
+        };
         google.accounts.id.initialize({
             client_id: "620150314608-nngruoh1gbevp4kbv5vir2h3on0fdnar.apps.googleusercontent.com",
             callback: handleCallbackResponse
@@ -44,11 +48,8 @@ export const Login = () => {
             document.getElementById('signInDiv'),
             {theme: "outline", size : "large"}
         )
-    },[])
-
-    if(isAuth) {
-        navigate("/profile")
-    };
+    },[isAuth])
+    
 
     return (
         <>
