@@ -28,11 +28,10 @@ export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
                 ))}
                 </div>
                 <div className="content">
-                    {/* <img src={imageUrl} width="120px" alt="" /> */}
-                    <video controls={true} poster={imageUrl}>
-                        <source src={imageUrl} />
-                    </video> 
-                    <span>{title}</span>
+                    <img src={imageUrl} width="120px" alt="" />
+                    {/* <video controls={true} poster={imageUrl}> */}
+                        {/* <source src={imageUrl} /> */}
+                    {/* </video>  */}
                 </div>
                 <div className="likes">
                     <CountPostLikes postId={id} />
@@ -41,6 +40,7 @@ export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
                     {/*  */}
                     <Link><i className='fa fa-send'></i></Link>
                 </div>
+                <span>{title}</span>
 
                 <div className="comment">
                     <input placeholder='comment...' type="text" />

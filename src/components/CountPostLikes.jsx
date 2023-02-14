@@ -52,19 +52,28 @@ export const CountPostLikes = ({ postId}) => {
             <Link style={{color: "red"}} onClick={(e)=> removeLike(e)} >
                 <i className='fa fa-heart'></i>
                 <br />
-                <span style={{fontSize: "15px"}}><small>Likes</small> {totalLikes}</span>
+                <span style={{fontSize: "15px"}}>
+                    {/* <small>Likes</small> */}
+                    {totalLikes}
+                </span>
             </Link>
             :
             <Link onClick={(e) => manageLike(e)}>
                 <i className='fa fa-heart-o'></i>
                 <br />
-                <span style={{fontSize: "15px"}}><small>Likes</small> {totalLikes}</span>
+                <span style={{fontSize: "15px"}}>
+                    {/* <small>Likes</small> */}
+                    {totalLikes}
+                </span>
             </Link>
             :
             <Link onClick={() => alert("Please Login first")}>
                 <i className='fa fa-heart-o'></i>
                 <br />
-                <span style={{fontSize: "15px"}}><small>Likes</small> {totalLikes}</span>
+                <span style={{fontSize: "15px"}}>
+                    {/* <small>Likes</small> */}
+                    {totalLikes}
+                </span>
             </Link>
         }
     </>
