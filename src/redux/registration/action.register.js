@@ -1,5 +1,5 @@
 import axios from "axios"
-import { ADD_USER_ERROR, ADD_USER_REQUEST, ADD_USER_SUCCESS, GET_USERS_REQUEST, GET_USERS_SUCCESS, GET_USERS_ERROR } from "../actionType"
+import { ADD_USER_ERROR, ADD_USER_REQUEST, ADD_USER_SUCCESS, GET_USERS_REQUEST, GET_USERS_SUCCESS, GET_USERS_ERROR, GET_PROFILE } from "../actionType"
 
 
 export const addUserRequest = () => {
@@ -24,6 +24,11 @@ export const getUserErr = () => {
 }
 
 
+export const getSingleUser = (payload) => {
+    return { type: GET_PROFILE, payload}
+}
+
+
 export const userRegistration = (userData) => (dispatch) => {
     dispatch(addUserRequest())
     // console.log(userData)
@@ -40,6 +45,16 @@ export const fetchUsers = (dispatch) => {
     dispatch(getUserReq)
     axios.get('http://localhost:8080/users').then((res) => {
         dispatch(getUserSuc(res.data))
+    })
+    .catch((err) =>{
+        dispatch(getUserReq)
+    })
+} 
+// 
+export const fetchSingleUser = (id) => (dispatch) => {
+    dispatch(getUserReq)
+    axios.get(`http://localhost:8080/users/${id}`).then((res) => {
+        dispatch(getSingleUser(res.data))
     })
     .catch((err) =>{
         dispatch(getUserReq)

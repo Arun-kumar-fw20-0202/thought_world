@@ -23,7 +23,7 @@ export const LoadSaved = ({ postId}) => {
     const savePost = (e) => {
         e.preventDefault()
         let userObj = {
-            savedUserId: activeUser.id,
+            savedUserId: +activeUser.id,
             postId : postId,
         }
         dispatch(AddToSave(userObj))
@@ -54,7 +54,7 @@ export const LoadSaved = ({ postId}) => {
                     <i className='fa fa-bookmark-o'></i>
                 </Link>
                 :
-                <Link onClick={() => alert("Please Login first")}>
+                <Link to="/login" >
                     <i className='fa fa-bookmark-o'></i>
                 </Link>
             }

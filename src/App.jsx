@@ -9,7 +9,6 @@ function App() {
   return (
    <>
       {location.pathname == "/login" || location.pathname == '/register'  ? "" : <Navbar />}
-      {/* <Navbar /> */}
       <AllRoutes />
    </>
   )

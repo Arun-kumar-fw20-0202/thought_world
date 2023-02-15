@@ -14,7 +14,7 @@ export const Login = () => {
     const dispatch = useDispatch() ;   
     const navigate = useNavigate();
     const location = useLocation();
-    // console.log(location.pathname)
+
     const { isAuth, activeUser,isLoading,isError} = useSelector((store) =>{
         return {
             isAuth: store.Loginreducer.isAuth,
@@ -27,22 +27,21 @@ export const Login = () => {
     const handleCallbackResponse = (response) => {
         let userObj = jwt_decode(response.credential)
         let newObj = {
-            id: userObj.sub,
+            id: +userObj.sub,
             gmail: userObj.email,
             avatar: userObj.picture,
             name: userObj.name,
             name2: userObj.given_name
         }
-        console.log(userObj)
         dispatch(Authantication(newObj))
     }
 
-    console.log(location)
+    // console.log(location)
+
     useEffect(() => {
-        if(isAuth) {
+        if(isAuth && location.state) {
             navigate(location.state)
-        }
-        else if(isAuth && location.pathname == '/login'){
+        }else if(isAuth && location.pathname == '/login'){
             navigate("/")
         }
         google.accounts.id.initialize({

@@ -5,7 +5,8 @@ import { reducer } from "./registration/reducer";
 import { Loginreducer } from "./loginReducer/reducer.login.js"
 import { LikeReducer } from "./likes/reducer.like.js"
 import { SaveReducer } from "./save/reducer.save.js"
+import { commentReducer } from "./comments/reducer.comment.js"
 
-const rootReducer = combineReducers({reducer,AddPostreducer,Loginreducer,LikeReducer, SaveReducer})
+const rootReducer = combineReducers({reducer,AddPostreducer,Loginreducer,LikeReducer, SaveReducer, commentReducer})
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))

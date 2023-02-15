@@ -23,7 +23,7 @@ export const CountPostLikes = ({ postId}) => {
     const manageLike = (e) => {
         e.preventDefault();
         let userObj = {
-            likedUserId: activeUser.id,
+            likedUserId: +activeUser.id,
             postId : postId,
             hitLike: true
         }
@@ -42,7 +42,9 @@ export const CountPostLikes = ({ postId}) => {
     }
 
     useEffect(() => {
-        dispatch(LoadLikes)
+        setTimeout(function(){
+            dispatch(LoadLikes)
+        })
     },[])
     
   return (
@@ -67,7 +69,7 @@ export const CountPostLikes = ({ postId}) => {
                 </span>
             </Link>
             :
-            <Link onClick={() => alert("Please Login first")}>
+            <Link to='/login'>
                 <i className='fa fa-heart-o'></i>
                 <br />
                 <span style={{fontSize: "15px"}}>

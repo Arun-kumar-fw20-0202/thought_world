@@ -10,9 +10,11 @@ const addData = {
   privatePost: false
 }
 export const AddPost = () => {
+
   const [state, setState] = useState(addData);
   const { title, imageUrl , privatePost} = state;
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
 
   const {isLoading, isError, activeUser} = useSelector((store) => {
     return {
@@ -27,6 +29,32 @@ export const AddPost = () => {
     setState({...state, [e.target.name]: val })
   }
 
+  
+	let image_url;
+	const handleAvatar = async (e)=>{
+		setLoading(true)
+		try{
+			let image = document.querySelector('#image');			
+			let actual_image = image.files[0];
+			
+			let form = new FormData();
+			form.append('image', actual_image);
+			
+			let res = await fetch(`https://api.imgbb.com/1/upload?key=f8c6dae46c1e3a6c267aa2ea5d96aacd`, {
+				method: 'POST',
+				body: form,
+			});
+	
+			let data = await res.json();
+			image_url = data.data.display_url;
+			setState({...state, [e.target.name]: image_url})
+			setLoading(false)      
+      
+		}catch(err){
+      console.log(err);
+		}
+	}
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     let newObj = {
@@ -36,8 +64,8 @@ export const AddPost = () => {
       privatePost: privatePost
     }
     dispatch(handleAddPost(newObj))
+    setState(addData)
   }
-  
 
   return (
     <div className='M_add'>
@@ -48,10 +76,9 @@ export const AddPost = () => {
             <span>Title</span>
               <input value={title} type="text" name='title' onChange={(e)=> handleChange(e)} />
             </div>
-            
             <div className="inputBx">
-              <span>Image Url</span>
-              <input value={imageUrl} type="url" name='imageUrl' onChange={(e)=> handleChange(e)} />
+              <span>Image</span>
+              <input type="file" id="image" name='imageUrl' onChange={handleAvatar} />
             </div>
 
             <div className="inputBx">
@@ -60,7 +87,8 @@ export const AddPost = () => {
             </div>
 
             <div className="inputBx">
-              <button>Add Post +</button>
+              {loading ? <b>please wait...</b> : ""}
+              <button disabled={loading}>Add Post +</button>
             </div>
         </form>  
       </div>
