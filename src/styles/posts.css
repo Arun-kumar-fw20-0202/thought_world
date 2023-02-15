@@ -1,6 +1,5 @@
 .SingleMain{
     display: flex;
-    /* align-items: center; */
     justify-content: center;
     /* border: 1px solid black; */
     
@@ -37,7 +36,6 @@
 .SingleMain > .card > .comments > .text{
     display: flex;
     justify-content: space-between;
-    /* box-shadow: 0 0 5px rgba(0,0,0,0.2); */
     border: 1px solid rgba(0,0,0,0.2);
     padding: 4px 10px;
     /* border: 1px solid red; */
@@ -67,6 +65,7 @@
 }
 .SingleMain > .card:last-child{
     /* background: red; */
+    width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -76,8 +75,6 @@
     padding: 8px 0;
     z-index: 120;
     background-color: rgba(215, 215, 215, 0.5);
-    /* display: flex; */
-    /* justify-content: space-between; */
     /* border: 1px solid #000; */
 }
 
