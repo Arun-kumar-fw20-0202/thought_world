@@ -7,11 +7,12 @@ import "../styles/profile.css"
 
 export const SingleUser = () => {
     const dispatch = useDispatch()
-    const {user,profile,posts} = useSelector((store) => {
+    const {user,profile,posts,activeUser} = useSelector((store) => {
         return {
           user: store.reducer.users,
           profile: store.reducer.profile,
-          posts: store.AddPostreducer.posts
+          posts: store.AddPostreducer.posts,
+          activeUser: store.Loginreducer.activeUser
         }
     })
   
@@ -32,7 +33,7 @@ export const SingleUser = () => {
     <div className="P_top">
       
       <div className="avatar">
-        <img src={profile.avatar} alt="" />
+        <img src={activeUser.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : activeUser.avatar} alt="" />
       </div>
       <div className="data">
         <h3>{profile.name}</h3>

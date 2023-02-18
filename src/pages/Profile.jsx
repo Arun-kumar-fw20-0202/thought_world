@@ -32,7 +32,7 @@ export const Profile = () => {
       <div className="P_top">
         
         <div className="avatar">
-          <img src={activeUser.avatar} alt="" />
+          <img src={activeUser.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : activeUser.avatar} alt="" />
         </div>
         <div className="data">
           <h3>{activeUser.name}</h3>
