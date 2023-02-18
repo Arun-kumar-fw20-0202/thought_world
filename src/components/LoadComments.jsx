@@ -24,7 +24,7 @@ export const LoadComments = ({comenteterId, comment, deleteStatus, id, postId, t
                 ele.id == comenteterId ? 
                 <div key={i} className="avatar">
                     <Link to={`/user/${comenteterId}`}>
-                        <img src={ele.avatar} alt="" />
+                        <img src={ele.avatar == "" ? "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" : ele.avatar} alt="" />
                         <h5>{ele.name2}</h5>
                     </Link>
                 </div>

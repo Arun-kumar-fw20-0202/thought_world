@@ -28,6 +28,8 @@ export default function Navbar() {
               <Link style={{textAlign: "center"}} onClick={handleLogout}>
                 {/* Logout */}
                 <img src={activeUser.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : activeUser.avatar} alt="" /> 
+                Logout
+                {" "}
                 {activeUser.name} 
               </Link> 
               :

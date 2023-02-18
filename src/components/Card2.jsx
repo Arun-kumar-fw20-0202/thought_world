@@ -47,7 +47,7 @@ useEffect(() => {
             {users.map((ele,i) => (
                     <span key={i}>
                         <Link to={`/user/${ele.id}`}>
-                            <img src={singlePost.userId == ele.id ? ele.avatar: ""} alt="" />
+                            <img src={singlePost.userId == ele.id ? ele.avatar == "" ? "https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" : ele.avatar : ""} alt="" />
                             <span className="username">{singlePost.userId == ele.id ? ele.name : ""}</span>
                         </Link>
                     </span>

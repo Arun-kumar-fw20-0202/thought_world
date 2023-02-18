@@ -35,12 +35,16 @@ export const Profile = () => {
           <img src={activeUser.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : activeUser.avatar} alt="" />
         </div>
         <div className="data">
-          <h3>{activeUser.name}</h3>
-          <p>{activeUser.given_name}</p>
+          <div className="names">
+            <h3>{activeUser.name}</h3>
+            <p>{activeUser.given_name || activeUser.gmail}</p>
+          </div>
           <br />
           <div className="totla">
             <h3>Posts: {total_posts}</h3>
+            <button>Edit Profile</button>
           </div>
+          
         </div>
 
       </div>

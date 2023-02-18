@@ -9,11 +9,12 @@
 }
 
 .profile_main > .P_top{
+    position: relative;
     padding: 10px 20px;
     display: flex;
     /* align-items: center; */
     gap: 50px;
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 .profile_main > .P_top > .avatar{
@@ -24,9 +25,20 @@
     border-radius: 50%;
     width: 100%;
 }
+.profile_main > .P_top > .data{
+    width: 100%s;
+    /* border: 1px solid black; */
+}
 
-.profile_main > .P_top > .totla{
-    border: 1px solid black;
+.profile_main > .P_top > .data > .totla button{
+    cursor: pointer;
+}
+.profile_main > .P_top > .data > .totla{
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    width: 100%;
+    /* border: 1px solid red; */
 }
 .profile_main > .My_posts{
     min-height: 100vh;

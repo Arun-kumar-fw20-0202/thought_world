@@ -140,6 +140,18 @@
       "postId": "3",
       "hitLike": true,
       "id": 21
+    },
+    {
+      "likedUserId": 1676739641723,
+      "postId": 9,
+      "hitLike": true,
+      "id": 22
+    },
+    {
+      "likedUserId": 1676739641723,
+      "postId": "3",
+      "hitLike": true,
+      "id": 23
     }
   ],
   "saved": [],
@@ -207,6 +219,14 @@
       "deleteStatus": false,
       "time": 1676471631920,
       "id": 8
+    },
+    {
+      "postId": "9",
+      "comment": "My first post",
+      "comenteterId": 1676739641723,
+      "deleteStatus": false,
+      "time": 1676742942638,
+      "id": 9
     }
   ],
   "users": [

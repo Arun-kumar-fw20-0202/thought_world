@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { LoadUserPost } from '../components/LoadUserPost';
-import { fetchSingleUser } from '../redux/registration/action.register';
+import { fetchSingleUser, fetchUsers } from '../redux/registration/action.register';
 import "../styles/profile.css"
 
 export const SingleUser = () => {
@@ -19,12 +19,19 @@ export const SingleUser = () => {
   const {id} = useParams('id')
   
   let total_posts = 0
+  let newAvatar = ''
   posts.map((ele) => {
     ele.userId == profile.id ? total_posts++ : ""
   })
+  user.map((ele) => {
+    ele.id == id ? newAvatar  = ele.avatar : ""
+    return
+  })
+  console.log(newAvatar)
     useEffect(() => {
         dispatch(fetchSingleUser(id))
         dispatch(LoadUserPost)
+        dispatch(fetchUsers)
     },[])
 
   return (
@@ -32,7 +39,7 @@ export const SingleUser = () => {
     <div className="P_top">
       
       <div className="avatar">
-        <img src={activeUser.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : activeUser.avatar} alt="" />
+        <img src={newAvatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : newAvatar} alt="" />
       </div>
       <div className="data">
         <h3>{profile.name}</h3>
