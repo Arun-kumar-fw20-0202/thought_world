@@ -1,11 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import "../styles/login.css"
 import 'font-awesome/css/font-awesome.min.css';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 // import { store } from "../store";
-import { Authantication } from "../redux/loginReducer/action.login";
+import { Authantication, Loginwithweb } from "../redux/loginReducer/action.login";
 let userInput = {
     username: '',
     password: '',
@@ -15,6 +15,8 @@ export const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const [loginData, setLogindata] = useState(userInput);
+    const {username, password} = loginData
     const { isAuth, activeUser,isLoading,isError} = useSelector((store) =>{
         return {
             isAuth: store.Loginreducer.isAuth,
@@ -23,6 +25,15 @@ export const Login = () => {
             isError: store.reducer.isError,
         }
     })
+
+    const handleChange = (e) => {
+        setLogindata({...loginData,[e.target.name]:e.target.value})
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(Loginwithweb(loginData))
+    }
 
     const handleCallbackResponse = (response) => {
         let userObj = jwt_decode(response.credential)
@@ -67,15 +78,15 @@ export const Login = () => {
                     <div className="box2">
                         <h3>{isLoading ? "Loging....": ""}</h3>
                         <h3>{isError ? "Something went wrong Please try again later" : ""}</h3>
-                        <form  autoComplete="off">
+                        <form  onSubmit={handleSubmit}>
                             <h1>Login</h1>
                                 <div className="inputBx">
-                                    <input required="" type="text" name="username" />
+                                    <input required="" type="text" name="username" value={username} onChange={(e) => handleChange(e)} />
                                     <span className="text"> <i className="fa fa-user"></i> Name</span>
                                     <span className="line"></span>
                                 </div>
                                 <div className="inputBx">
-                                    <input required="" type="Password" name="password" />
+                                    <input required="" type="Password" name="password" value={password} onChange={(e) => handleChange(e)} />
                                     <span className="text">Password</span>
                                     <span className="line"></span>
                                 </div>

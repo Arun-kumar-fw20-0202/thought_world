@@ -1,41 +1,50 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { userRegistration } from '../redux/registration/action.register'
+import { fetchUsers, userRegistration } from '../redux/registration/action.register'
 import "../styles/register.css"
 
 let userData = {
     phone: '',
     gender: '',
     name: '',
-    lname: '',
     gmail: '',
     password: '',
     avatar: '',
+    id: null,
 }
 
 export const Register = () => {
     const dispatch = useDispatch()
-    const isLoading = useSelector((store) => {
-        return store.isLoading
+    const {users,isLoading,isError} = useSelector((store) => {
+        return{
+            isLoading: store.reducer.isLoading,
+            users: store.reducer.users,
+            isError: store.reducer.isError
+        }
     })
 
     const [data, setData] = useState(userData);
 
-    const { phone, gender, name, lname, gmail, password } = data
+    const { phone, gender, name, gmail, password , id} = data
 
     const handleChange = (e) => {
         setData({...data, [e.target.name] : e.target.value })
     }
 
+    // console.log(Math.floor(Math.random() + Date.now()))
+
+
     const handleRegister = (e) => {
         e.preventDefault()
+        data.id = Math.floor(Math.random() + Date.now())
         dispatch(userRegistration(data))
     }
 
     useEffect(() => {
         if(!isLoading){
             setData(userData)
+            dispatch(fetchUsers)
         }
     },[isLoading])
     
@@ -52,20 +61,12 @@ export const Register = () => {
                 {/* <!--  --> */}
                 <div className="box2">
                     {/* <!-- form --> */}
-                    <form autoComplete="off" onSubmit={(e) => handleRegister(e)}>
+                    <form onSubmit={(e) => handleRegister(e)}>
                     <div className="inputBx">
                         <input required="required" type="text" value={name} name="name" minLength="0" maxLength="25" onChange={(e) => handleChange(e)} />
                         <span className="text">Name</span>
                         <span className="line"></span>
                     </div>
-                    {/* <!--  --> */}
-
-                    <div className="inputBx">
-                        <input required="required" type="text" name="lname" value={lname} onChange={(e) => handleChange(e)} />
-                        <span className="text">Last Name</span>
-                        <span className="line"></span>
-                    </div>
-                    {/* <!--  -->	 */}
                     {/* <!--  --> */}
                     <div className="inputBx">
                         <input required="required" type="tel" name="phone" value={phone}  minLength="0" maxLength="10" onChange={(e) => handleChange(e)} />
@@ -97,6 +98,7 @@ export const Register = () => {
                         <input disabled={isLoading} type="submit" value="Register" /> 
                         or <Link to="/login">Sign In</Link>
                         {isLoading ? <p>Please wait...</p> : ""}
+                        {isError ? <h5>Something went wrong</h5>: ""}
                     </div>
                 </form>
                 </div>

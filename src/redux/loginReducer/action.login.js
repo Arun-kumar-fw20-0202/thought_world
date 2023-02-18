@@ -24,6 +24,27 @@ export const GoogleLogoutError = () => {
     return {type: LOGOUT_USER_ERROR}
 }
 
+// 
+
+export const Loginwithweb = (loginData) => (dispatch)=> {
+    dispatch(loginUserRequest)
+    console.log(loginData)
+    axios.get(`http://localhost:8080/users`).then((res) => {
+        res.data.map((ele) => {
+            if(ele.gmail == loginData.username && ele.password == loginData.password){
+                dispatch(loginUserSuccess(ele))
+                localStorage.setItem('userData',JSON.stringify(ele))
+                localStorage.setItem('isAuth',JSON.stringify(true))
+                return;
+            }
+        })
+    })
+    .catch((err) => {
+        dispatch(loginUserError)
+    })
+}
+
+// 
 export const Authantication = (userData) => (dispatch) => {
     dispatch(loginUserRequest)
     axios.get("http://localhost:8080/users").then((res)=> {
@@ -36,7 +57,7 @@ export const Authantication = (userData) => (dispatch) => {
                     localStorage.setItem('isAuth',JSON.stringify(true))     
 
                 }).catch((err)=> {
-                    dispatch(loginUserError())
+                    dispatch(loginUserError)
                 })
         }else{
             res.data.map((el)=> {                
@@ -55,7 +76,7 @@ export const Authantication = (userData) => (dispatch) => {
                         localStorage.setItem('isAuth',JSON.stringify(true))     
                         
                     }).catch((err)=> {
-                        dispatch(loginUserError())
+                        dispatch(loginUserError)
                     })
                 }
             })
