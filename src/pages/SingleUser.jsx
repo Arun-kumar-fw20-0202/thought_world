@@ -22,7 +22,6 @@ export const SingleUser = () => {
   posts.map((ele) => {
     ele.userId == profile.id ? total_posts++ : ""
   })
-
     useEffect(() => {
         dispatch(fetchSingleUser(id))
         dispatch(LoadUserPost)
