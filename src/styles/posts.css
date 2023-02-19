@@ -180,7 +180,25 @@
     background-color: rgba(215, 215, 215, 0.5);
     /* display: flex; */
     /* justify-content: space-between; */
-    /* border: 1px solid #000; */
+    border: 1px solid #000;
+}
+.card > .head span{
+    /* background-color: blue; */
+}
+.card > .head > .headSpan .username{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.card > .head > .headSpan a{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    gap: 20px;
+}
+.card > .head > .headSpan{
+    display: flex;
+    border: 1px solid lime;
 }
 .card > .head > .option{
     position: absolute;
@@ -192,8 +210,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* background-color: red; */
     cursor: pointer;
+    /* background-color: red; */
 }
 .card > .head > .more::before{
     content: "";
@@ -206,7 +224,11 @@
     z-index: -1;
     background-color: white;
 }
-.card > .head.active > .more{
+/* .card > .head.active > .more {
+    visibility: visible;
+    opacity: 1;
+} */
+.card > .head > .option.active ~ .more {
     visibility: visible;
     opacity: 1;
 }

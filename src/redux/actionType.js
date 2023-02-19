@@ -42,3 +42,11 @@ export const DELETE_POST = "DELETE_POST";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const GET_COMMENT = "GET_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+
+
+
+export const FOLLOW_REQUEST = "FOLLOW_REQUEST";
+export const FOLLOW_SUCCESS = "FOLLOW_SUCCESS";
+export const FOLLOW_ERROR = "FOLLOW_ERROR";
+export const GET_FOLLOWER = "GET_FOLLOWER";
+export const UN_FOLLOW = "UN_FOLLOW";

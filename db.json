@@ -152,9 +152,23 @@
       "postId": "3",
       "hitLike": true,
       "id": 23
+    },
+    {
+      "likedUserId": 118384988105595850000,
+      "postId": 9,
+      "hitLike": true,
+      "id": 24
     }
   ],
   "saved": [],
+  "followers": [
+    {
+      "followingId": 102074821942506060000,
+      "myId": 1676739641723,
+      "date": 1676838492511,
+      "id": 1
+    }
+  ],
   "comments": [
     {
       "postId": 5,

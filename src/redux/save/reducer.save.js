@@ -6,14 +6,13 @@ const initialState = {
 
 export const SaveReducer = (state= initialState, {type, payload}) =>{
 
-switch(type){
-    case SAVE_POST: return {...state,  save: state.save = [...state.save,payload]}
-    case GET_SAVE_POST: return {...state, save: state.save= payload}
-    case REMOVE_SAVE_POST : {
-            const filterLikes = state.save.filter((ele) => ele.id != payload)
-            return {...state,  save: filterLikes}
+    switch(type){
+        case SAVE_POST: return {...state,  save: state.save = [...state.save,payload]}
+        case GET_SAVE_POST: return {...state, save: state.save= payload}
+        case REMOVE_SAVE_POST : {
+                const filterLikes = state.save.filter((ele) => ele.id != payload)
+                return {...state,  save: filterLikes}
         }
-
-    default: return state
-}
+        default: return state
+    }
 }

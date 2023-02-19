@@ -4,9 +4,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { fetchUsers } from '../redux/registration/action.register'
 import { CountPostLikes } from './CountPostLikes'
 import { LoadSaved } from './LoadSaved';
-import $ from 'jquery';
-import { handleDeletePost } from '../redux/addPostReducer/action.addPost'
 import { AddComment, getComments } from '../redux/comments/action.comment'
+import { PostHead } from './postHead'
 
 export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
     const [comment, setComment] = useState('')
@@ -21,17 +20,7 @@ export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
             comments: store.commentReducer.comments
         }
     },shallowEqual)
-
-    $(document).on('click','.head',function() {
-        $('.head').removeClass('active')
-        $(this).toggleClass('active')
-    })
-
     // 
-
-    const DeletePost = () =>{
-        dispatch(handleDeletePost(id))
-    }
 
     const typeComment = (e) => {
         setComment(e.target.value)
@@ -62,26 +51,11 @@ export const LoadPost = ({userId,imageUrl,title,privatePost,id}) => {
     <>
         {privatePost ? "" : 
             <div className="card">
-                <div className="head">
-                {users.map((ele,i) => (
-                        <span key={i}>
-                            <Link to={ele.id == activeUser.id ? "/profile" : `/user/${ele.id}`}>
-                                <img src={userId == ele.id ? ele.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : ele.avatar : ""} alt="" />
-                                <span className="username">{userId == ele.id ? ele.name : ""}</span>
-                            </Link>
-                        </span>
-                ))}
-                    <span className="option"> <b>...</b></span>
-                    <div className="more">
-                        {userId == activeUser.id ?
-                            <>
-                                <Link onClick={DeletePost}>Delete</Link>
-                                <Link>Edit</Link>
-                                <Link>Make Private</Link>
-                            </>
-                        :""}
-                    </div>
-                </div>
+                {/* 
+                    post head 
+                */}
+                <PostHead userId={userId} id={id} />
+                {/*  */}
                 <div className="content">
                     <img src={imageUrl} width="120px" alt="" />
                 </div>
