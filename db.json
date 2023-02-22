@@ -148,25 +148,49 @@
       "id": 22
     },
     {
-      "likedUserId": 1676739641723,
-      "postId": "3",
-      "hitLike": true,
-      "id": 23
-    },
-    {
       "likedUserId": 118384988105595850000,
       "postId": 9,
       "hitLike": true,
       "id": 24
+    },
+    {
+      "likedUserId": 1676739641723,
+      "postId": 3,
+      "hitLike": true,
+      "id": 25
+    },
+    {
+      "likedUserId": 1676739641723,
+      "postId": 5,
+      "hitLike": true,
+      "id": 26
+    },
+    {
+      "likedUserId": 1676739641723,
+      "postId": 7,
+      "hitLike": true,
+      "id": 27
     }
   ],
   "saved": [],
   "followers": [
     {
-      "followingId": 102074821942506060000,
-      "myId": 1676739641723,
-      "date": 1676838492511,
-      "id": 1
+      "followingId": "1676739641723",
+      "myId": 102074821942506060000,
+      "date": 1677093330883,
+      "id": 4
+    },
+    {
+      "followingId": "102074821942506060000",
+      "myId": 105387912693180300000,
+      "date": 1677093527002,
+      "id": 5
+    },
+    {
+      "followingId": "102074821942506060000",
+      "myId": 103306986501127730000,
+      "date": 1677093528419,
+      "id": 6
     }
   ],
   "comments": [

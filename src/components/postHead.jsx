@@ -41,13 +41,15 @@ export const PostHead = ({userId,id}) => {
         dispatch(handleDeletePost(id))
     }    
 
+    // check if the usre is following or not
     let check = false;
     let followId = null;
     follower.map((ele) => {
-        ele.followingId == userId ? check = true : ""
+        ele.followingId == userId && ele.myId == activeUser.id ? check = true : ""
         ele.followingId == userId ? followId = ele.id : ""
     })
-
+    
+  // fetching data
     useEffect(() => {
         dispatch(fetchUsers)
         dispatch(LoadFollower)
@@ -69,7 +71,7 @@ export const PostHead = ({userId,id}) => {
                                 </Link>
                                 {" "}
                                 {/* <span key={ele.id}> */}
-                                {check ? <button onClick={() => unfollow_user(followId)}>Following</button> : <button onClick={follow_user}>Follow</button>}
+                                {check ? <button onClick={() => unfollow_user(followId)}>Unfollow</button> : <button onClick={follow_user}>Follow</button>}
                                 {/* </span> */}
                             </span>
                     </span>

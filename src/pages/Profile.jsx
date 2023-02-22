@@ -1,28 +1,46 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { LoadUserPost } from '../components/LoadUserPost'
 import { handleGetPost } from '../redux/addPostReducer/action.addPost'
+import { LoadFollower } from '../redux/follower/action.follower'
+import { fetchUsers } from '../redux/registration/action.register'
 import "../styles/profile.css"
 
 export const Profile = () => {
   const dispatch = useDispatch()
-  const {isAuth, activeUser,posts} = useSelector((store) => {
+  const {isAuth, activeUser,posts,follower,user} = useSelector((store) => {
     return { 
       activeUser: store.Loginreducer.activeUser,
+      user: store.reducer.users,
       isAuth: store.Loginreducer.isAuth,
       posts: store.AddPostreducer.posts,
+      follower : store.FollowerReducer.follower
     }
+  },shallowEqual)
+
+  // Get following & followers
+  let followers = 0;
+  let following = 0;
+  follower.map((ele) => {
+    activeUser.id == ele.myId ? following++ :""
+    //get followers
+    user.map((el) => {
+      el.id == ele.followingId && el.id == activeUser.id ? followers++ : ""
+    })
   })
   
+  // Get Total post
   let total_posts = 0
   posts.map((ele) => {
     ele.userId == activeUser.id ? total_posts++ : ""
   })
 
+  // fetching data
   useEffect(() => {
     dispatch(handleGetPost)
-    
+    dispatch(LoadFollower)
+    dispatch(fetchUsers)
   },[])
 
   // console.log(activeUser)
@@ -36,13 +54,18 @@ export const Profile = () => {
         </div>
         <div className="data">
           <div className="names">
-            <h3>{activeUser.name}</h3>
+            <h3>
+              {activeUser.name}
+
+              <button>Edit profile</button>
+            </h3>
             <p>{activeUser.given_name || activeUser.gmail}</p>
           </div>
           <br />
           <div className="totla">
-            <h3>Posts: {total_posts}</h3>
-            <button>Edit Profile</button>
+          <h3>Posts: {total_posts}</h3>
+            <h3>Followers: {followers}</h3>
+            <h3>Following: {following}</h3>
           </div>
           
         </div>
