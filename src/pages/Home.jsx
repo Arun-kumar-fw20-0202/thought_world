@@ -14,15 +14,7 @@ export const Home = () => {
             posts: store.AddPostreducer.posts
         }
     },shallowEqual)
-    
-    // var date = new Date();
-    // console.log(date.toLocaleString('en-GB'));
 
-    var t=new Date();
-    var re=t.toLocaleString('en-GB');
-    re=re.slice(12);
-    console.log(re)
-    console.log(re + 24)
 
   useEffect(() => {
     dispatch(handleGetPost)

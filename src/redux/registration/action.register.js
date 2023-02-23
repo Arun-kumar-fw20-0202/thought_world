@@ -33,7 +33,6 @@ export const userRegistration = (userData) => (dispatch) => {
     dispatch(addUserRequest())
     console.log(userData)
     axios.post('http://localhost:8080/users',userData).then((res) => {
-        console.log(res)
         dispatch(addUserSuccess(res.data))
     })
     .catch((err) => {

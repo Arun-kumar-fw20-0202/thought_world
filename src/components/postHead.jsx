@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { handleDeletePost } from '../redux/addPostReducer/action.addPost'
-import { fetchUsers } from '../redux/registration/action.register'
+import { fetchSingleUser, fetchUsers } from '../redux/registration/action.register'
 import $ from 'jquery';
 import { followHandler, LoadFollower, UnfollowHandler } from '../redux/follower/action.follower'
 
@@ -11,11 +11,12 @@ export const PostHead = ({userId,id}) => {
     const dispatch = useDispatch()
     const location = useLocation()
     // console.log(userId)
-    const {activeUser, users, follower} = useSelector((store) => {
+    const {isAuth,activeUser, users, follower} = useSelector((store) => {
         return {
             users: store.reducer.users,
             activeUser : store.Loginreducer.activeUser,
-            follower : store.FollowerReducer.follower
+            follower : store.FollowerReducer.follower,
+            isAuth: store.Loginreducer.isAuth,
         }
     },shallowEqual)
     
@@ -23,6 +24,7 @@ export const PostHead = ({userId,id}) => {
         $('.option').removeClass('active')
         $(this).toggleClass('active')
     })
+    // console.log(isAuth)
     
     const follow_user = () => {
         let obj = {
@@ -71,7 +73,13 @@ export const PostHead = ({userId,id}) => {
                                 </Link>
                                 {" "}
                                 {/* <span key={ele.id}> */}
-                                {check ? <button onClick={() => unfollow_user(followId)}>Unfollow</button> : <button onClick={follow_user}>Follow</button>}
+                                {ele.id != activeUser.id ?
+                                    isAuth ?
+                                    check ? <button onClick={() => unfollow_user(followId)}>Unfollow</button> : <button onClick={follow_user}>Follow</button>
+                                    : // if not logedin
+                                        <button>Follow</button>
+                                    :"" // hide button from own
+                                }
                                 {/* </span> */}
                             </span>
                     </span>

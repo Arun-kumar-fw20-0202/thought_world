@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { LoadUserPost } from '../components/LoadUserPost'
 import { handleGetPost } from '../redux/addPostReducer/action.addPost'
-import { LoadFollower } from '../redux/follower/action.follower'
+import { LoadFollower, UnfollowHandler } from '../redux/follower/action.follower'
 import { fetchUsers } from '../redux/registration/action.register'
 import "../styles/profile.css"
 
 export const Profile = () => {
   const dispatch = useDispatch()
+  const [whatTOshow, setWhatToshow] = useState("")
+  const [shodHide, setShodHide] = useState(false)
   const {isAuth, activeUser,posts,follower,user} = useSelector((store) => {
     return { 
       activeUser: store.Loginreducer.activeUser,
@@ -19,22 +21,43 @@ export const Profile = () => {
     }
   },shallowEqual)
 
+  const handleShowFollowers = () => {
+    setWhatToshow('followrs')
+    setShodHide(true)
+  }
+  const handleShowFollowing = () => {
+    setWhatToshow('following')
+    setShodHide(true)
+  }
+  const closePopup = () => {
+    setShodHide(false)
+    setWhatToshow('')
+  }
+
   // Get following & followers
-  let followers = 0;
-  let following = 0;
-  follower.map((ele) => {
-    activeUser.id == ele.myId ? following++ :""
+  let count_followers = 0;
+  let count_following = 0;
+  let check = false;
+  let followId = null;
+  user.map((ele) => {
     //get followers
-    user.map((el) => {
-      el.id == ele.followingId && el.id == activeUser.id ? followers++ : ""
+    follower.map((el) => {
+      ele.id == el.followingId && el.myId == activeUser.id  ? count_following++ : ""
+      ele.id == el.myId && activeUser.id == el.followingId  ? count_followers++ : ""
     })
   })
-  
+
   // Get Total post
   let total_posts = 0
   posts.map((ele) => {
     ele.userId == activeUser.id ? total_posts++ : ""
   })
+
+  
+  const unfollow_user = (unFollowId) => {
+    // alert(unFollowId)
+    dispatch(UnfollowHandler(unFollowId))
+}
 
   // fetching data
   useEffect(() => {
@@ -46,38 +69,88 @@ export const Profile = () => {
   // console.log(activeUser)
 
   return (
-    <div className='profile_main'>
-      <div className="P_top">
-        
-        <div className="avatar">
-          <img src={activeUser.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : activeUser.avatar} alt="" />
-        </div>
-        <div className="data">
-          <div className="names">
-            <h3>
-              {activeUser.name}
-
-              <button>Edit profile</button>
-            </h3>
-            <p>{activeUser.given_name || activeUser.gmail}</p>
+    <>
+    {shodHide ? 
+      <div className="followersPopup">
+        {/*  */}
+          {whatTOshow && whatTOshow == 'following' ? 
+          <div className="popup">
+            <button onClick={closePopup}><i className='fa fa-close'></i></button>
+            <h1>Following</h1>
+            <div className="list">
+              {user.map((ele,i) => (
+                follower.map((el) => (
+                  ele.id == el.followingId && el.myId == activeUser.id ? 
+                  <div key={i} className="userItem">
+                    <span>
+                      {/* <img src={ele.avatar} alt="" /> */}
+                      <img src={ele.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : ele.avatar} alt="" />
+                      <h2>{ele.name}</h2>
+                    </span>
+                    <button onClick={() => unfollow_user(el.id)}>Unfollow</button>
+                  </div> : ""
+                ))
+              ))}
+            </div>
           </div>
-          <br />
-          <div className="totla">
-          <h3>Posts: {total_posts}</h3>
-            <h3>Followers: {followers}</h3>
-            <h3>Following: {following}</h3>
-          </div>
+        // {/*  */}
+        :
+          <div className="popup">
+            <button onClick={closePopup}><i className='fa fa-close'></i></button>
+              <h1>Followrs</h1>
+              <div className="list">
+                {user.map((ele,i) => (
+                  follower.map((el) => (
+                    ele.id == el.myId && activeUser.id == el.followingId ? 
+                    <div key={i} className="userItem">
+                      <span>
+                        <img src={ele.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : ele.avatar} alt="" />
+                        <h2>{ele.name}</h2>
+                      </span>
+                      <button>Remove</button>
+                    </div> : ""
+                  ))
+                ))}
+              </div>
+            </div>  
+          }
+         {/*  */}
+      </div>
+      : ""}
+      {/*  */}
+      <div className='profile_main'>
+        <div className="P_top">
           
-        </div>
+          <div className="avatar">
+            <img src={activeUser.avatar == "" ? 'https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png' : activeUser.avatar} alt="" />
+          </div>
+          <div className="data">
+            <div className="names">
+              <h3>
+                {activeUser.name}
 
+                <button>Edit profile</button>
+              </h3>
+              <p>{activeUser.given_name || activeUser.gmail}</p>
+            </div>
+            <br />
+            <div className="totla">
+            <h3>Posts: {total_posts}</h3>
+              <h3 onClick={handleShowFollowers}>Followers: {count_followers}</h3>
+              <h3 onClick={handleShowFollowing}>Following: {count_following}</h3>
+            </div>
+            
+          </div>
+
+        </div>
+        <div className="My_posts">
+          {posts && posts.map((ele,i) => (
+            ele.userId == activeUser.id ? 
+            <LoadUserPost key={i} {...ele} />
+              : ""
+              ))}
+        </div>
       </div>
-      <div className="My_posts">
-        {posts && posts.map((ele,i) => (
-          ele.userId == activeUser.id ? 
-              <LoadUserPost key={i} {...ele} />
-            : ""
-          ))}
-      </div>
-    </div>
+    </>
   )
 }
